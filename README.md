@@ -5,7 +5,7 @@
 Developers can use a Virtual Machine (VM) for development in order to quickly get up and running with a system that has Elixir installed. Everyone will have the same setup regardless of the host machine.
 
 The VM will have:
-* Ubuntu
+* Linux (Ubuntu)
 * Erlang
 * Elixir
 * PostgreSQL
