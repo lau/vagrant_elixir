@@ -3,7 +3,7 @@
 VAGRANTFILE_API_VERSION = "2"
 
 VM_NAME = "my_elixir_vm"
-MEMORY_SIZE_MB = 512
+MEMORY_SIZE_MB = 1024
 NUMBER_OF_CPUS = 2
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
