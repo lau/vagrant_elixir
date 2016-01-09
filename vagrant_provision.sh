@@ -56,9 +56,7 @@ ALTER USER postgres WITH ENCRYPTED PASSWORD '$POSTGRES_DB_PASS';
 EOF
 
 # Install nodejs and npm
-echo "deb https://deb.nodesource.com/node_0.12 trusty main" >> /etc/apt/sources.list && \
-wget -qO- https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
-apt-get -qq update && \
+curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
 apt-get install -y \
 nodejs
 

@@ -9,7 +9,7 @@ The VM will have:
 * Erlang
 * Elixir
 * PostgreSQL
-* various dependencies for the Phoenix framework
+* nodejs 5 and other dependencies for the Phoenix framework
 
 The provisioning script can easiliy be modified for other versions of the software.
 
