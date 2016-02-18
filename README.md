@@ -33,3 +33,17 @@ The `/vagrant` directory will be linked to the project directory on the host mac
  `Vagrantfile` and `vagrant_provision.sh` should be added to version control.
 On the other hand it is recommended to ignore the `.vagrant` directory. If you are using git you could add this line to `.gitignore`:
 `.vagrant/*`
+
+## Phoenix / inotify auto-reload issues
+
+Warning: There are issues with Phoenix auto reloading and Vagrant. This appears to be because
+of inotify being incompatible with the `/vagrant` directory being connected to the host file system.
+
+Vagrant can still be used for instance for doing releases of a Phoenix project.
+
+## Warning: Hex dependencies
+
+If you do `mix deps.get` on the vagrant machine it will get dependencies appropriate for that.
+Some dependencies are only compatible for that machine. This means that if you run `mix deps.get`
+on the vagrant machine you can only use those kinds of dependencies on the vagrant machine and not
+on the host. And vice versa.
