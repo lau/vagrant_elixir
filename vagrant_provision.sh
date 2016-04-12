@@ -1,7 +1,7 @@
 #!/bin/sh
 
 ERLANG_VERSION=18.2
-ELIXIR_VERSION=1.2.0
+ELIXIR_VERSION=1.2.4
 
 # Note: password is for postgres user "postgres"
 POSTGRES_DB_PASS=postgres
