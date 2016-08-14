@@ -1,7 +1,7 @@
 #!/bin/sh
 
-ERLANG_VERSION=18.2
-ELIXIR_VERSION=1.2.0
+ELIXIR_VERSION=1.3.2
+NODE_VERSION=6
 
 # Note: password is for postgres user "postgres"
 POSTGRES_DB_PASS=postgres
@@ -25,11 +25,11 @@ ntp \
 inotify-tools
 
 # Install Erlang
-echo "deb http://packages.erlang-solutions.com/ubuntu trusty contrib" >> /etc/apt/sources.list && \
+echo "deb http://packages.erlang-solutions.com/ubuntu xenial contrib" >> /etc/apt/sources.list && \
 apt-key adv --fetch-keys http://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc && \
 apt-get -qq update && \
 apt-get install -y \
-erlang=1:$ERLANG_VERSION \
+esl-erlang
 
 # Install Elixir
 cd / && mkdir elixir && cd elixir && \
@@ -56,7 +56,7 @@ ALTER USER postgres WITH ENCRYPTED PASSWORD '$POSTGRES_DB_PASS';
 EOF
 
 # Install nodejs and npm
-curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
+curl -sL https://deb.nodesource.com/setup_$NODE_VERSION.x | sudo -E bash -
 apt-get install -y \
 nodejs
 
