@@ -1,6 +1,7 @@
 #!/bin/sh
 
-ELIXIR_VERSION=1.3.2
+ERLANG_VERSION=18.3.4
+ELIXIR_VERSION=1.3.3
 NODE_VERSION=6
 
 # Note: password is for postgres user "postgres"
@@ -28,8 +29,8 @@ inotify-tools
 echo "deb http://packages.erlang-solutions.com/ubuntu xenial contrib" >> /etc/apt/sources.list && \
 apt-key adv --fetch-keys http://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc && \
 apt-get -qq update && \
-apt-get install -y \
-esl-erlang
+apt-get install -y -f \
+esl-erlang="1:${ERLANG_VERSION}"
 
 # Install Elixir
 cd / && mkdir elixir && cd elixir && \
