@@ -1,12 +1,12 @@
 #!/bin/sh
 
-ERLANG_VERSION=18.3.4
-ELIXIR_VERSION=1.3.3
+ERLANG_VERSION=19.2
+ELIXIR_VERSION=1.4.0
 NODE_VERSION=6
 
 # Note: password is for postgres user "postgres"
 POSTGRES_DB_PASS=postgres
-POSTGRES_VERSION=9.3
+POSTGRES_VERSION=9.5
 
 # Set language and locale
 apt-get install -y language-pack-en
@@ -33,7 +33,7 @@ apt-get install -y -f \
 esl-erlang="1:${ERLANG_VERSION}"
 
 # Install Elixir
-cd / && mkdir elixir && cd elixir && \
+cd / && mkdir -p elixir && cd elixir && \
 wget -q https://github.com/elixir-lang/elixir/releases/download/v$ELIXIR_VERSION/Precompiled.zip && \
 unzip Precompiled.zip && \
 rm -f Precompiled.zip && \
@@ -42,10 +42,13 @@ ln -s /elixir/bin/elixir /usr/local/bin/elixir && \
 ln -s /elixir/bin/mix /usr/local/bin/mix && \
 ln -s /elixir/bin/iex /usr/local/bin/iex
 
-# Install local Elixir hex and rebar for the vagrant user
-su - vagrant -c '/usr/local/bin/mix local.hex --force && /usr/local/bin/mix local.rebar --force'
+# Install local Elixir hex and rebar for the ubuntu user
+su - ubuntu -c '/usr/local/bin/mix local.hex --force && /usr/local/bin/mix local.rebar --force'
 
 # Postgres
+sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
+wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | apt-key add -
+apt-get update
 apt-get -y install postgresql-$POSTGRES_VERSION postgresql-contrib-$POSTGRES_VERSION
 
 PG_CONF="/etc/postgresql/$POSTGRES_VERSION/main/postgresql.conf"
@@ -68,7 +71,7 @@ apt-get install -y imagemagick
 if [ -f /vagrant/priv/repo/seeds.exs ]
   then
     # Set up and migrate database
-    su - vagrant -c 'cd /vagrant && mix deps.get && mix ecto.create && mix ecto.migrate'
+    su - ubuntu -c 'cd /vagrant && mix deps.get && mix ecto.create && mix ecto.migrate'
     # Run Phoenix seed data script
-    su - vagrant -c 'cd /vagrant && mix run priv/repo/seeds.exs'
+    su - ubuntu -c 'cd /vagrant && mix run priv/repo/seeds.exs'
 fi
