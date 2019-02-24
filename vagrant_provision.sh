@@ -1,7 +1,7 @@
 #!/bin/sh
 
 ERLANG_VERSION=19.2
-ELIXIR_VERSION=1.4.0
+ELIXIR_VERSION=1.5.3
 NODE_VERSION=6
 
 # Note: password is for postgres user "postgres"
